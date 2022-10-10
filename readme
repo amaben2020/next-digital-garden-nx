@@ -14,3 +14,5 @@ Go to tailwind.config
 Markdown generator: https://jaspervdj.be/lorem-markdownum/
 
 libs folder is where app logic for the monorepos should reside
+--dry-run : ensures that nothing is created, just the file structure is viewed
+yarn nx g @nrwl/react:library mdx-elements --directory=shared --dry-run

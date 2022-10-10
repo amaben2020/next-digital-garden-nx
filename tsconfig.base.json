@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@domsmith/markdown": ["libs/markdown/src/index.ts"]
+      "@domsmith/markdown": ["libs/markdown/src/index.ts"],
+      "@domsmith/shared/mdx-elements": ["libs/shared/mdx-elements/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

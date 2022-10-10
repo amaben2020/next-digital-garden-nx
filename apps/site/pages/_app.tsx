@@ -8,7 +8,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Welcome to site!</title>
       </Head>
-      <main>
+      <main className="bg-black">
         <Component {...pageProps} />
       </main>
     </>

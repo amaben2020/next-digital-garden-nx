@@ -1,38 +1,43 @@
-import { GetStaticProps } from 'next';
-import styles from './index.module.css';
+import { readdirSync } from 'fs';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { join } from 'path';
+import { ParsedUrlQuery } from 'querystring';
 
-export interface ArticleProps {
-  slug: string | string[];
+export interface ArticleProps extends ParsedUrlQuery {
+  slug: string;
 }
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: { slug: 'slug1' },
-      },
-      {
-        params: { slug: 'slug2' },
-      },
-    ],
-    fallback: false,
-  };
-};
+const FOLDER = '_articles';
+const POSTS_PATH = join(process.cwd(), FOLDER);
 
-export const getStaticProps: GetStaticProps<ArticleProps> = async ({
-  params: { slug },
-}): Promise<{ props: { slug: string | string[] } }> => {
-  return {
-    props: { slug },
-  };
-};
-
-export function Article(props) {
+export function Article(props: ArticleProps) {
   return (
-    <div className={styles['container']}>
-      <h1>Welcome to Article! {props.slug}</h1>
+    <div>
+      <h1>Visiting, {props.slug}</h1>
     </div>
   );
 }
+export const getStaticProps: GetStaticProps<ArticleProps> = async ({
+  params,
+}: {
+  params: ArticleProps;
+}) => {
+  return {
+    props: {
+      slug: params.slug,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths<ArticleProps> = async () => {
+  const paths = readdirSync(POSTS_PATH)
+    .map((path) => path.replace(/\.md?$/, ''))
+    .map((slug) => ({ params: { slug } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
 export default Article;

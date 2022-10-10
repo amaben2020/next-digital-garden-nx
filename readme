@@ -4,10 +4,13 @@ Running the server: yarn nx serve or yarn nx run site:serve
 
 creating a folder with file: yarn nx g @nrwl/next:page --name"[slug]" --style=none --directory=articles --dry-run
 
-
 Setting up tailwind: Note, you have to install in the base i.e domsmith but configure in the required monorepo i.e site
 
 Build: yarn nx build site
 
 Optimizing build for tailwind: i.e purging for unused tailwind files
 Go to tailwind.config
+
+Markdown generator: https://jaspervdj.be/lorem-markdownum/
+
+libs folder is where app logic for the monorepos should reside

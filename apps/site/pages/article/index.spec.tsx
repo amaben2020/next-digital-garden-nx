@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import Article from './index';
+import Article from './[slug]';
 
 describe('Article', () => {
   it('should render successfully', () => {

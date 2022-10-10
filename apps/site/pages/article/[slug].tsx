@@ -1,3 +1,4 @@
+import { getParsedFileContentBySlug, renderMarkdown } from '@domsmith/markdown';
 import { readdirSync } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
@@ -24,7 +25,11 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
 }) => {
   //1. parse the content of our markdown and separate it into frontmatter and content
 
+  const parseMarkdownFile = getParsedFileContentBySlug(params.slug, POSTS_PATH);
+
   //2.  Convert markdown content => html
+
+  const markdownConntent = renderMarkdown();
 
   return {
     props: {

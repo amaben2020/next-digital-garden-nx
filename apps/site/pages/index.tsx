@@ -8,7 +8,7 @@ export function Index() {
    */
   return (
     <div className={styles.page}>
-      <div className="wrapper">
+      <div className="bg-gray">
         <div className="container">
           <div id="welcome">
             <h1>

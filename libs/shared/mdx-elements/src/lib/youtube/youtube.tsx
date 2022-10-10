@@ -1,5 +1,3 @@
-import styles from './youtube.module.css';
-
 export interface YoutubeProps {
   title: string;
   uid: string;
@@ -7,7 +5,7 @@ export interface YoutubeProps {
 
 export function Youtube(props: YoutubeProps) {
   return (
-    <div className={styles['container']}>
+    <div>
       <iframe
         src={`https://www.youtube.com/embed/${props.uid}`}
         width="100%"

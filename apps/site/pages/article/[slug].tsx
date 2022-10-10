@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
-import Youtube from '../../../../libs/shared/mdx-elements/src/lib/youtube/youtube';
+import { Youtube } from '@domsmith/shared/mdx-elements';
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -20,9 +20,11 @@ export function Article({ frontmatter, content }: ArticleProps) {
   return (
     <div>
       <h1>{frontmatter.title}</h1>
-      <h3>Visiting, {frontmatter?.author?.name}</h3>
+      <h3>Visiting, {frontmatter.author.name}</h3>
       <hr />
-      <MDXRemote {...content} components={mdxElements} />
+      <div>
+        <MDXRemote {...content} components={mdxElements} />
+      </div>
     </div>
   );
 }
@@ -37,7 +39,7 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
 
   //2.  Convert markdown content => html
 
-  const markdownContent = await renderMarkdown(parseMarkdownFile.content);
+  const markdownContent = await renderMarkdown(parseMarkdownFile?.content);
 
   return {
     props: {
@@ -49,7 +51,7 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
 
 export const getStaticPaths: GetStaticPaths<ArticleProps> = async () => {
   const paths = readdirSync(POSTS_PATH)
-    .map((path) => path.replace(/\.md?$/, ''))
+    .map((path) => path.replace(/\.mdx?$/, ''))
     .map((slug) => ({ params: { slug } }));
 
   return {

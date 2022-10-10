@@ -1,0 +1,5 @@
+Creating a project : npx create-nx-workspace domsmith --packageManager=yarn
+
+
+creating a folder with file: yarn nx g @nrwl/next:page --name"[slug]" --style=none --directory=articles --dry-run
+

@@ -22,6 +22,10 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
 }: {
   params: ArticleProps;
 }) => {
+  //1. parse the content of our markdown and separate it into frontmatter and content
+
+  //2.  Convert markdown content => html
+
   return {
     props: {
       slug: params.slug,

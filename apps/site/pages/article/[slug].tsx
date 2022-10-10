@@ -14,7 +14,8 @@ const POSTS_PATH = join(process.cwd(), FOLDER);
 export function Article({ frontmatter }: ArticleProps) {
   return (
     <div>
-      <h1>Visiting, {frontmatter?.author?.name}</h1>
+      <h1>{frontmatter.title}</h1>
+      <h3>Visiting, {frontmatter?.author?.name}</h3>
     </div>
   );
 }

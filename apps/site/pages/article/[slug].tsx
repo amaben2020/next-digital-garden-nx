@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
+import dynamic from 'next/dynamic';
 import { CustomLink, Youtube } from '@domsmith/shared/mdx-elements';
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
@@ -13,7 +14,9 @@ const FOLDER = '_articles';
 const POSTS_PATH = join(process.cwd(), FOLDER);
 
 const mdxElements = {
-  Youtube,
+  Youtube: dynamic(
+    async () => await (await import('@domsmith/shared/mdx-elements')).Youtube
+  ),
   as: CustomLink,
 };
 

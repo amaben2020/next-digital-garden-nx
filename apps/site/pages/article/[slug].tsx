@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
+import Youtube from '../../../../libs/shared/mdx-elements/src/lib/youtube/youtube';
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -11,13 +12,17 @@ export interface ArticleProps extends ParsedUrlQuery {
 const FOLDER = '_articles';
 const POSTS_PATH = join(process.cwd(), FOLDER);
 
+const mdxElements = {
+  Youtube,
+};
+
 export function Article({ frontmatter, content }: ArticleProps) {
   return (
     <div>
       <h1>{frontmatter.title}</h1>
       <h3>Visiting, {frontmatter?.author?.name}</h3>
       <hr />
-      <MDXRemote {...content} />
+      <MDXRemote {...content} components={mdxElements} />
     </div>
   );
 }

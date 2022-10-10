@@ -7,17 +7,19 @@ export function getParsedFileContentBySlug(fileName: string, postPath: string) {
 
 
   // Getting the filepath of the markdown file
-  const postFilePath = join(postPath, fileName)
+  const postFilePath = join(postPath, `${fileName}.md`)
 
   // reading it
 
   const info = readFileSync(postFilePath)
   const { data, content } = matter(info)
   return {
-    frontmatter: data,
+    frontMatter: data,
     content
   }
 }
+
+
 export function renderMarkdown(): string {
   return 'markdown';
 }

@@ -11,10 +11,10 @@ export interface ArticleProps extends ParsedUrlQuery {
 const FOLDER = '_articles';
 const POSTS_PATH = join(process.cwd(), FOLDER);
 
-export function Article(props: ArticleProps) {
+export function Article({ frontmatter }: ArticleProps) {
   return (
     <div>
-      <h1>Visiting, {props.slug}</h1>
+      <h1>Visiting, {frontmatter?.author?.name}</h1>
     </div>
   );
 }
@@ -22,18 +22,20 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
   params,
 }: {
   params: ArticleProps;
-}) => {
+}): Promise<any> => {
   //1. parse the content of our markdown and separate it into frontmatter and content
 
   const parseMarkdownFile = getParsedFileContentBySlug(params.slug, POSTS_PATH);
 
+  console.log(parseMarkdownFile);
+
   //2.  Convert markdown content => html
 
-  const markdownConntent = renderMarkdown();
+  const markdownContent = renderMarkdown();
 
   return {
     props: {
-      slug: params.slug,
+      frontmatter: parseMarkdownFile.frontMatter,
     },
   };
 };

@@ -3,7 +3,7 @@ import { readdirSync } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
-
+import { MDXRemote } from 'next-mdx-remote';
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
@@ -11,11 +11,13 @@ export interface ArticleProps extends ParsedUrlQuery {
 const FOLDER = '_articles';
 const POSTS_PATH = join(process.cwd(), FOLDER);
 
-export function Article({ frontmatter }: ArticleProps) {
+export function Article({ frontmatter, content }: ArticleProps) {
   return (
     <div>
       <h1>{frontmatter.title}</h1>
       <h3>Visiting, {frontmatter?.author?.name}</h3>
+      <hr />
+      <MDXRemote {...content} />
     </div>
   );
 }
@@ -28,15 +30,14 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
 
   const parseMarkdownFile = getParsedFileContentBySlug(params.slug, POSTS_PATH);
 
-  console.log(parseMarkdownFile);
-
   //2.  Convert markdown content => html
 
-  const markdownContent = renderMarkdown();
+  const markdownContent = await renderMarkdown(parseMarkdownFile.content);
 
   return {
     props: {
       frontmatter: parseMarkdownFile.frontMatter,
+      content: markdownContent,
     },
   };
 };

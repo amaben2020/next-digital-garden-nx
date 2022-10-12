@@ -16,3 +16,7 @@ Markdown generator: https://jaspervdj.be/lorem-markdownum/
 libs folder is where app logic for the monorepos should reside
 --dry-run : ensures that nothing is created, just the file structure is viewed
 yarn nx g @nrwl/react:library mdx-elements --directory=shared --dry-run
+
+sandbox to be used in blog training section: https://www.joshwcomeau.com/react/next-level-playground/
+
+// Continue from 17 https://egghead.io/lessons/next-js-using-environment-variables-with-next-js-and-nx

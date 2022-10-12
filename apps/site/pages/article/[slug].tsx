@@ -5,7 +5,7 @@ import { join } from 'path';
 import { ParsedUrlQuery } from 'querystring';
 import { MDXRemote } from 'next-mdx-remote';
 import dynamic from 'next/dynamic';
-import { CustomLink, Youtube } from '@domsmith/shared/mdx-elements';
+import { CustomLink } from '@domsmith/shared/mdx-elements';
 export interface ArticleProps extends ParsedUrlQuery {
   slug: string;
 }
